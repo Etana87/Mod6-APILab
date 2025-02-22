@@ -1,43 +1,24 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import * as api from './api';
-import { createEmptyCharacter, Character } from './Character.vm';
-import { mapCharacterFromApiToVm, mapCharacterFromVmToApi } from './Character.mappers';
-import { Lookup } from '#common/models';
-import { CharacterComponent } from './Character.component';
+import { getCharacter } from '../Character/api/Character.api';
+import { CharacterComponent } from '../Character/Character.component';
+import { createEmptyCharacter, Character } from '../Character/Character.vm';
 
-export const CharacterContainer: React.FunctionComponent = (props) => {
-  const [Character, setCharacter] = React.useState<Character>(createEmptyCharacter());
-  const [cities, setCities] = React.useState<Lookup[]>([]);
+export const CharacterContainer: React.FunctionComponent = () => {
+  const [character, setCharacter] = React.useState<Character>(createEmptyCharacter());
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const handleLoadCityCollection = async () => {
-    const apiCities = await api.getCities();
-    setCities(apiCities);
-  };
-
-  const handleLoadCharacter = async () => {
-    const apiCharacter = await api.getCharacter(id);
-    setCharacter(mapCharacterFromApiToVm(apiCharacter));
-  };
-
   React.useEffect(() => {
     if (id) {
-      handleLoadCharacter();
+      getCharacter(id).then(setCharacter);
     }
-    handleLoadCityCollection();
-  }, []);
+  }, [id]);
 
-  const handleSave = async (Character: Character) => {
-    const apiCharacter = mapCharacterFromVmToApi(Character);
-    const success = await api.saveCharacter(apiCharacter);
-    if (success) {
-      navigate(-1);
-    } else {
-      alert('Error on save Character');
-    }
+  const handleSave = async (updatedCharacter: Character) => {
+    console.log('Saving character (mocked):', updatedCharacter);
+    navigate(-1);
   };
 
-  return <CharacterComponent Character={Character} cities={cities} onSave={handleSave} />;
+  return <CharacterComponent Character={character} cities={[]} onSave={handleSave} />;
 };

@@ -1,37 +1,25 @@
-import * as React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { linkRoutes } from '#core/router';
-import { deleteCharacter } from './api';
-import { useCharacterCollection } from './Character-collection.hook';
-import { CharacterCollectionComponent } from './Character-collection.component';
+import { getCharacterCollection } from '../Character/api/Character.api';
+import { CharacterCollectionComponent } from '../Character-collection/Character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { CharacterCollection, loadCharacterCollection } = useCharacterCollection();
+  const [characterCollection, setCharacterCollection] = React.useState([]);
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    loadCharacterCollection();
+    getCharacterCollection().then(setCharacterCollection);
   }, []);
-
-  const handleCreateCharacter = () => {
-    navigate(linkRoutes.createCharacter);
-  };
 
   const handleEdit = (id: string) => {
     navigate(linkRoutes.editCharacter(id));
   };
 
-  const handleDelete = async (id: string) => {
-    await deleteCharacter(id);
-    loadCharacterCollection();
-  };
-
   return (
     <CharacterCollectionComponent
-      CharacterCollection={CharacterCollection}
-      onCreateCharacter={handleCreateCharacter}
+      CharacterCollection={characterCollection}
       onEdit={handleEdit}
-      onDelete={handleDelete}
     />
   );
 };
