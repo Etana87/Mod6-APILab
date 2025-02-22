@@ -1,0 +1,50 @@
+{
+    "characters": [
+      {
+        "id": "1",
+        "name": "Rick Sanchez",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Male",
+        "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+        "bestSentence": "Wubba Lubba Dub Dub!"
+      },
+      {
+        "id": "2",
+        "name": "Morty Smith",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Male",
+        "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+        "bestSentence": "Oh jeez, Rick!"
+      },
+      {
+        "id": "3",
+        "name": "Summer Smith",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Female",
+        "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+        "bestSentence": "Boo-yah!"
+      },
+      {
+        "id": "4",
+        "name": "Beth Smith",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Female",
+        "image": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+        "bestSentence": "I'm a horse surgeon!"
+      },
+      {
+        "id": "5",
+        "name": "Jerry Smith",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Male",
+        "image": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
+        "bestSentence": "I just want to be a good father."
+      }
+    ]
+  }
+  
