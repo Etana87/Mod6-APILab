@@ -11,14 +11,20 @@ export const CharacterContainer: React.FunctionComponent = () => {
 
   React.useEffect(() => {
     if (id) {
-      getCharacter(id).then(setCharacter);
+      getCharacter(id).then((data) => {
+        if (data) setCharacter(data);
+      });
     }
   }, [id]);
 
   const handleSave = async (updatedCharacter: Character) => {
-    console.log('Saving character (mocked):', updatedCharacter);
-    navigate(-1);
+    const success = await updateCharacter(updatedCharacter);
+    if (success) {
+      navigate(-1);
+    } else {
+      alert('Error saving character');
+    }
   };
 
-  return <CharacterComponent Character={character} cities={[]} onSave={handleSave} />;
+  return <CharacterComponent Character={character} onSave={handleSave} />;
 };
